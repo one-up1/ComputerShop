@@ -1,8 +1,4 @@
 ﻿using ComputerShop.Data.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ComputerShop.Web.Controllers
@@ -11,9 +7,9 @@ namespace ComputerShop.Web.Controllers
     {
         private IRepairData db;
 
-        public HomeController()
+        public HomeController(IRepairData db)
         {
-            db = new InMemoryRepairData();
+            this.db = db;
         }
 
         public ActionResult Index()
