@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComputerShop.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,17 @@ namespace ComputerShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepairData db;
+
+        public HomeController()
+        {
+            db = new InMemoryRepairData();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var model = db.GetAll();
+            return View(model);
         }
 
         public ActionResult About()
