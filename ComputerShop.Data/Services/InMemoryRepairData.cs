@@ -22,5 +22,10 @@ namespace ComputerShop.Data.Services
         {
             return repairs.OrderBy(r => r.StartDate);
         }
+
+        public Repair Get(int id)
+        {
+            return repairs.FirstOrDefault(r => r.Id == id);
+        }
     }
 }
