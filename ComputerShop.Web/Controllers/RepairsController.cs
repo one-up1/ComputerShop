@@ -1,6 +1,5 @@
 ﻿using ComputerShop.Data.Models;
 using ComputerShop.Data.Services;
-using System;
 using System.Web.Mvc;
 
 namespace ComputerShop.Web.Controllers
@@ -70,6 +69,25 @@ namespace ComputerShop.Web.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var model = db.Get(id);
+            if (model == null)
+            {
+                return View("NotFound");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, FormCollection form)
+        {
+            db.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

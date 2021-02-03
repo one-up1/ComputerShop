@@ -15,9 +15,10 @@ namespace ComputerShop.Web
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterApiControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<InMemoryRepairData>()
+            builder.RegisterType<SqlRepairData>()
                 .As<IRepairData>()
-                .SingleInstance();
+                .InstancePerRequest();
+            builder.RegisterType<ComputerShopDbContext>().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -20,7 +20,7 @@ namespace ComputerShop.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Wij lossen al uw problemen voor u op";
+            ViewBag.Message = "We lossen al uw problemen voor u op";
 
             return View();
         }

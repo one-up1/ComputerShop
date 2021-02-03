@@ -4,7 +4,7 @@
     ViewBag.Title = "Bewerken";
 }
 
-<h2>Bewerken</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
@@ -57,5 +57,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug", "Index")
 </div>

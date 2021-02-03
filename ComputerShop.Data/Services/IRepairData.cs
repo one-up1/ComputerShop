@@ -12,5 +12,7 @@ namespace ComputerShop.Data.Services
         void Add(Repair repair);
 
         void Update(Repair repair);
+
+        void Delete(int id);
     }
 }
