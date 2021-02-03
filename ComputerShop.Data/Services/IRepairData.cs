@@ -8,5 +8,9 @@ namespace ComputerShop.Data.Services
         IEnumerable<Repair> GetAll();
 
         Repair Get(int id);
+
+        void Add(Repair repair);
+
+        void Update(Repair repair);
     }
 }

@@ -1,10 +1,19 @@
-﻿namespace ComputerShop.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ComputerShop.Data.Models
 {
     public enum Status
     {
-        Pending,            // In afwachting
-        InProgress,         // In behandeling
-        WaitingForParts,    // Wacht op onderdelen
-        Completed           // Klaar
+        [Display(Name = "In afwachting")]
+        Pending,
+
+        [Display(Name = "In behandeling")]
+        InProgress,
+
+        [Display(Name = "Wacht op onderdelen")]
+        WaitingForParts,
+
+        [Display(Name = "Klaar")]
+        Completed
     }
 }

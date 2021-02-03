@@ -209,6 +209,8 @@
     <Content Include="Views\Repairs\Index.cshtml" />
     <Content Include="Views\Repairs\Details.cshtml" />
     <Content Include="Views\Repairs\NotFound.cshtml" />
+    <Content Include="Views\Repairs\Create.cshtml" />
+    <Content Include="Views\Repairs\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
