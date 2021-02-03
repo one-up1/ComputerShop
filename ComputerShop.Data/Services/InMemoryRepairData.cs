@@ -14,7 +14,7 @@ namespace ComputerShop.Data.Services
             repairs = new List<Repair>()
             {
                 new Repair { Id = 1, StartDate = new DateTime(2020, 12, 21), EndDate = new DateTime(2020, 12, 28), Status = Status.Completed, Description = "HDD crash" },
-                new Repair { Id = 2, StartDate = new DateTime(2021, 1, 2), EndDate = new DateTime(2021, 3, 1), Status = Status.InProgress, Description = "Rook" }
+                new Repair { Id = 2, StartDate = new DateTime(2021, 1, 2), Status = Status.InProgress, Description = "Rook" }
             };
         }
 

@@ -20,14 +20,14 @@ namespace ComputerShop.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Wij lossen al uw problemen voor u op";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Neem contact met ons op";
 
             return View();
         }
