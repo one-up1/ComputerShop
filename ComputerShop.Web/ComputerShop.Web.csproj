@@ -220,6 +220,7 @@
     <Content Include="Views\Repairs\Create.cshtml" />
     <Content Include="Views\Repairs\Edit.cshtml" />
     <Content Include="Views\Repairs\Delete.cshtml" />
+    <Content Include="Views\Repairs\_RepairSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

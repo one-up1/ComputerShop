@@ -66,6 +66,7 @@ namespace ComputerShop.Web.Controllers
             if (ModelState.IsValid)
             {
                 db.Update(repair);
+                TempData["Message"] = "Reparatie opgeslagen";
                 return RedirectToAction("Index");
             }
             return View();
