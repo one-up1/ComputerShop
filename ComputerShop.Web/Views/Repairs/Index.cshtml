@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ComputerShop.Data.Models.Repair>
+﻿@using ComputerShop.Web.Models
+@using ComputerShop.Data.Models
+@model IEnumerable<ComputerShop.Data.Models.Repair>
 
 @{
     ViewBag.Title = "Reparaties";
@@ -27,25 +29,26 @@
     </tr>
 
 @foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.StartDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EndDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Status)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.ActionLink("Bewerken", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })
-    </td>
-</tr>
+    var status = EnumHelper<Status>.GetDisplayValue(item.Status);
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Bewerken", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })
+        </td>
+    </tr>
 }
 
 </table>
