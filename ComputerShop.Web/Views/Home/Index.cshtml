@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ComputerShop.Data.Models.Repair>
+﻿@using ComputerShop.Data.Models
+@using ComputerShop.Web.Models
+@model IEnumerable<ComputerShop.Data.Models.Repair>
 
 @{
     ViewBag.Title = "Computer reparatieshop";
@@ -8,5 +10,28 @@
     <h1>@ViewBag.Title</h1>
     <div>
         Er zijn @Model.Count() reparaties in de database
+    </div>
+
+    <div>
+        <br />
+        <table>
+            @{
+                Dictionary<Status, int> statusCounts = new Dictionary<Status, int>();
+                statusCounts.Add(Status.Pending, 0);
+                statusCounts.Add(Status.InProgress, 0);
+                statusCounts.Add(Status.WaitingForParts, 0);
+                statusCounts.Add(Status.Completed, 0);
+
+                foreach (var item in Model)
+                {
+                    statusCounts[item.Status]++;
+                }
+            }
+            @foreach (Status status in statusCounts.Keys)
+            {
+                @Html.Raw("<tr><td>" + EnumHelper<Status>.GetDisplayValue(status) +
+                        "</td><td style='padding-left: 8px;'>" + statusCounts[status] + "</td></tr>");
+            }
+        </table>
     </div>
 </div>

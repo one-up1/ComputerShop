@@ -1,5 +1,5 @@
-﻿@using ComputerShop.Web.Models
-@using ComputerShop.Data.Models
+﻿@using ComputerShop.Data.Models
+@using ComputerShop.Web.Models
 @model ComputerShop.Data.Models.Repair
 
 <div class="panel panel-default">
@@ -7,10 +7,7 @@
         <h3 class="panel-title">@Model.Description</h3>
     </div>
     <div class="panel-body">
-        @{
-            var status = EnumHelper<Status>.GetDisplayValue(Model.Status);
-        }
-        <div>@status</div>
+        <div>@Html.Raw(EnumHelper<Status>.GetDisplayValue(Model.Status))</div>
         <br />
 
         @Html.ActionLink("Bewerken", "Edit", new { id = Model.Id }) |
