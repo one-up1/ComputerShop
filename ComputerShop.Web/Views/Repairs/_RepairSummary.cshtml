@@ -2,8 +2,12 @@
 @using ComputerShop.Web.Models
 @model ComputerShop.Data.Models.Repair
 
+@{
+    var color = Model.EndDate == null || Model.EndDate >= DateTime.Now.Date ? "transparent" : "red";
+}
+
 <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading" style="background-color: @color">
         <h3 class="panel-title">@Model.Description</h3>
     </div>
     <div class="panel-body">
