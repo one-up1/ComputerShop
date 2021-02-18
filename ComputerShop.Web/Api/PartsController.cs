@@ -5,18 +5,18 @@ using System.Web.Http;
 
 namespace ComputerShop.Web.Api
 {
-    public class RepairsController : ApiController
+    public class PartsController : ApiController
     {
         private readonly IShopData db;
 
-        public RepairsController(IShopData db)
+        public PartsController(IShopData db)
         {
             this.db = db;
         }
 
-        public IEnumerable<Repair> Get()
+        public IEnumerable<Part> Get()
         {
-            var model = db.GetRepairs();
+            var model = db.GetParts();
             return model;
         }
     }

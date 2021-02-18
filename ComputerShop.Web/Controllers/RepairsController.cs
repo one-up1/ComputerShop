@@ -6,9 +6,9 @@ namespace ComputerShop.Web.Controllers
 {
     public class RepairsController : Controller
     {
-        private readonly IRepairData db;
+        private readonly IShopData db;
 
-        public RepairsController(IRepairData db)
+        public RepairsController(IShopData db)
         {
             this.db = db;
         }
@@ -16,13 +16,13 @@ namespace ComputerShop.Web.Controllers
         // GET: Repairs
         public ActionResult Index()
         {
-            var model = db.GetAll();
+            var model = db.GetRepairs();
             return View(model);
         }
 
         public ActionResult Details(int id)
         {
-            var model = db.Get(id);
+            var model = db.GetRepair(id);
             if (model == null)
             {
                 return View("NotFound");
@@ -42,7 +42,7 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(repair);
+                db.AddRepair(repair);
                 return RedirectToAction("Details", new { id = repair.Id });
             }
             return View();
@@ -51,7 +51,7 @@ namespace ComputerShop.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var model = db.Get(id);
+            var model = db.GetRepair(id);
             if (model == null)
             {
                 return View("NotFound");
@@ -65,7 +65,7 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(repair);
+                db.UpdateRepair(repair);
                 TempData["Message"] = "Reparatie opgeslagen";
                 return RedirectToAction("Index");
             }
@@ -75,7 +75,7 @@ namespace ComputerShop.Web.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var model = db.Get(id);
+            var model = db.GetRepair(id);
             if (model == null)
             {
                 return View("NotFound");
@@ -87,7 +87,7 @@ namespace ComputerShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection form)
         {
-            db.Delete(id);
+            db.DeleteRepair(id);
             return RedirectToAction("Index");
         }
     }

@@ -1,4 +1,6 @@
-﻿@model ComputerShop.Data.Models.Repair
+﻿@using ComputerShop.Data.Models
+@using ComputerShop.Web.Models
+@model ComputerShop.Data.Models.Repair
 
 @{
     ViewBag.Title = "Details";
@@ -31,7 +33,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.Raw(EnumHelper<Status>.GetDisplayValue(Model.Status))
         </dd>
 
         <dt>

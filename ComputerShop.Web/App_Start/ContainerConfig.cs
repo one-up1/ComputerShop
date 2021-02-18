@@ -15,8 +15,8 @@ namespace ComputerShop.Web
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterApiControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<SqlRepairData>()
-                .As<IRepairData>()
+            builder.RegisterType<SqlShopData>()
+                .As<IShopData>()
                 .InstancePerRequest();
             builder.RegisterType<ComputerShopDbContext>().InstancePerRequest();
 

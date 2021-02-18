@@ -5,16 +5,16 @@ namespace ComputerShop.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepairData db;
+        private IShopData db;
 
-        public HomeController(IRepairData db)
+        public HomeController(IShopData db)
         {
             this.db = db;
         }
 
         public ActionResult Index()
         {
-            var model = db.GetAll();
+            var model = db.GetRepairs();
             return View(model);
         }
 
