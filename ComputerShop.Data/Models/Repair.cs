@@ -25,5 +25,8 @@ namespace ComputerShop.Data.Models
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Omschrijving is verplicht")]
         public string Description { get; set; }
+
+        [Display(Name = "Onderdeel")]
+        public Part Part { get; set; }
     }
 }
