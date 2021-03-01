@@ -7,6 +7,19 @@ namespace ComputerShop.Data.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Naam")]
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Naam is verplicht")]
+        public string Name { get; set; }
+
+        [Display(Name = "Status")]
+        public Status Status { get; set; }
+
+        [Display(Name = "Omschrijving")]
+        [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Omschrijving is verplicht")]
+        public string Description { get; set; }
+
         [Display(Name = "Startdatum")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -18,15 +31,8 @@ namespace ComputerShop.Data.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> EndDate { get; set; }
 
-        [Display(Name = "Status")]
-        public Status Status { get; set; }
-
-        [Display(Name = "Omschrijving")]
+        [Display(Name = "Oplossing")]
         [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Omschrijving is verplicht")]
-        public string Description { get; set; }
-
-        [Display(Name = "Onderdeel")]
-        public Part Part { get; set; }
+        public string Solution { get; set; }
     }
 }

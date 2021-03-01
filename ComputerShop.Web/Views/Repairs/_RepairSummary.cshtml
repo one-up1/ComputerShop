@@ -8,10 +8,13 @@
 
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color: @color">
-        <h3 class="panel-title">@Model.Description</h3>
+        <h3 class="panel-title">@Model.Name</h3>
     </div>
     <div class="panel-body">
         <div>@Html.Raw(EnumHelper<Status>.GetDisplayValue(Model.Status))</div>
+        <br />
+
+        <div class="multiline">@Model.Description</div>
         <br />
 
         @Html.ActionLink("Bewerken", "Edit", new { id = Model.Id }) |

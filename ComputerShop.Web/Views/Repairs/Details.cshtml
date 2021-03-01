@@ -6,12 +6,36 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details van @Html.DisplayFor(model => model.Description)</h2>
+<h2>Details van @Html.DisplayFor(model => model.Name)</h2>
 
 <div>
     <h4>Reparatie</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.Raw(EnumHelper<Status>.GetDisplayValue(Model.Status))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            <div class="multiline">@Html.DisplayFor(model => model.Description)</div>
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
@@ -29,21 +53,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Solution)
         </dt>
 
         <dd>
-            @Html.Raw(EnumHelper<Status>.GetDisplayValue(Model.Status))
+            <div class="multiline">@Html.DisplayFor(model => model.Solution)</div>
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
     </dl>
 </div>
 <p>
