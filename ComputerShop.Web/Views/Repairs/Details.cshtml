@@ -25,7 +25,7 @@
         </dt>
 
         <dd>
-            @Html.Raw(EnumHelper<Status>.GetDisplayValue(Model.Status))
+            @(EnumHelper<Status>.GetDisplayValue(Model.Status))
         </dd>
 
         <dt>
@@ -58,6 +58,26 @@
 
         <dd>
             <div class="multiline">@Html.DisplayFor(model => model.Solution)</div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parts)
+        </dt>
+
+        <dd>
+            <table class="table">
+                @foreach (var item in Model.Parts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>

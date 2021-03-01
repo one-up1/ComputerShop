@@ -29,8 +29,14 @@
             }
             @foreach (Status status in statusCounts.Keys)
             {
-                @Html.Raw("<tr><td>" + EnumHelper<Status>.GetDisplayValue(status) +
-                        "</td><td style='padding-left: 8px;'>" + statusCounts[status] + "</td></tr>");
+                <tr>
+                    <td>
+                        @(EnumHelper<Status>.GetDisplayValue(status))
+                    </td>
+                    <td style='padding-left: 8px;'>
+                        @statusCounts[status]
+                    </td>
+                </tr>
             }
         </table>
     </div>

@@ -8,5 +8,7 @@ namespace ComputerShop.Data.Services
         public DbSet<Repair> Repairs { get; set; }
 
         public DbSet<Part> Parts { get; set; }
+
+        public DbSet<RepairPart> RepairParts { get; set; }
     }
 }

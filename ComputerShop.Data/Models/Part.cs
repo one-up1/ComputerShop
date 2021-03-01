@@ -15,5 +15,10 @@ namespace ComputerShop.Data.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Prijs is verplicht")]
         public double Price { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

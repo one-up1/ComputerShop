@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ComputerShop.Data.Models
@@ -34,5 +35,8 @@ namespace ComputerShop.Data.Models
         [Display(Name = "Oplossing")]
         [DataType(DataType.MultilineText)]
         public string Solution { get; set; }
+
+        [Display(Name = "Onderdelen")]
+        public IEnumerable<Part> Parts { get; set; }
     }
 }
