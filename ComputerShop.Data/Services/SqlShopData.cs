@@ -23,12 +23,7 @@ namespace ComputerShop.Data.Services
 
         public Repair GetRepair(int id)
         {
-            var entry = db.Repairs.FirstOrDefault(r => r.Id == id);
-            entry.Parts = (from r in db.Parts
-                           join rp in db.RepairParts on r.Id equals rp.Part.Id
-                           where rp.Repair.Id == id
-                           select r);
-            return entry;
+            return db.Repairs.FirstOrDefault(r => r.Id == id);
         }
 
         public void AddRepair(Repair repair)
