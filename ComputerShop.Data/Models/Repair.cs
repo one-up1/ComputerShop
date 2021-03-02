@@ -37,6 +37,6 @@ namespace ComputerShop.Data.Models
         public string Solution { get; set; }
 
         [Display(Name = "Onderdelen")]
-        public virtual ICollection<Part> Parts { get; set; }
+        public IEnumerable<Part> Parts { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ComputerShop.Data.Models
 {
@@ -16,8 +15,6 @@ namespace ComputerShop.Data.Models
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Prijs is verplicht")]
         public double Price { get; set; }
-
-        public virtual ICollection<Repair> Repairs { get; set; }
 
         public override string ToString()
         {
