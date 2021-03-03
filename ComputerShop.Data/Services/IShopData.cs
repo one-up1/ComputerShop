@@ -24,5 +24,7 @@ namespace ComputerShop.Data.Services
         void UpdatePart(Part repair);
 
         void DeletePart(int id);
+
+        IEnumerable<Part> GetRepairParts(int repairId);
     }
 }

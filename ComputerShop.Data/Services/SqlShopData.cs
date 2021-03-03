@@ -23,12 +23,9 @@ namespace ComputerShop.Data.Services
 
         public Repair GetRepair(int id)
         {
-            var entry = db.Repairs.FirstOrDefault(r => r.Id == id);
-            entry.Parts = (from r in db.Parts
-                           join rp in db.RepairParts on r.Id equals rp.Part.Id
-                           where rp.Repair.Id == id
-                           select r);
-            return entry;
+            var repair = db.Repairs.FirstOrDefault(r => r.Id == id);
+            repair.Parts = GetRepairParts(id);
+            return repair;
         }
 
         public void AddRepair(Repair repair)
@@ -81,6 +78,14 @@ namespace ComputerShop.Data.Services
             var part = db.Parts.Find(id);
             db.Parts.Remove(part);
             db.SaveChanges();
+        }
+
+        public IEnumerable<Part> GetRepairParts(int repairId)
+        {
+            return from p in db.Parts
+                   join rp in db.RepairParts on p.Id equals rp.Part.Id
+                   where rp.Repair.Id == repairId
+                   select p;
         }
     }
 }

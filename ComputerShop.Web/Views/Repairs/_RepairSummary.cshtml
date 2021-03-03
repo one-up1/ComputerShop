@@ -19,6 +19,7 @@
 
         @Html.ActionLink("Bewerken", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
+        @Html.ActionLink("Onderdelen", "Index", "RepairParts", new { id = Model.Id }, null) |
         @Html.ActionLink("Verwijderen", "Delete", new { id = Model.Id })
     </div>
 </div>
