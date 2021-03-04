@@ -61,7 +61,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Parts)
+            @Html.ActionLink("Onderdelen", "Index", "RepairParts", new { id = Model.Id }, null)
         </dt>
 
         <dd>
@@ -70,10 +70,10 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => item.Part.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Price)
+                            @Html.DisplayFor(modelItem => item.Part.Price)
                         </td>
                     </tr>
                 }

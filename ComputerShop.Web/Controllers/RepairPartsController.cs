@@ -1,6 +1,7 @@
 ﻿using ComputerShop.Data.Models;
 using ComputerShop.Data.Services;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace ComputerShop.Web.Controllers
 {
@@ -16,8 +17,51 @@ namespace ComputerShop.Web.Controllers
         // GET: RepairParts
         public ActionResult Index(int id)
         {
-            var model = db.GetRepairParts(id);
+            var model = new RepairPartsViewModel();
+            model.RepairId = id;
+            model.RepairParts = db.GetRepairParts(id);
+
+            model.Parts = new List<SelectListItem>();
+            foreach (var part in db.GetParts())
+            {
+                var item = new SelectListItem()
+                {
+                    Text = part.Name,
+                    Value = part.Id.ToString()
+                };
+                model.Parts.Add(item);
+            }
+
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(int repairId, int value)
+        {
+            if (ModelState.IsValid)
+            {
+                db.AddRepairPart(repairId, value);
+                return RedirectToAction("Index", new { id = repairId });
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            db.DeleteRepairPart(id);
+
+            return RedirectToAction("Index");
+        }
+    }
+
+    public class RepairPartsViewModel
+    {
+        public int RepairId { get; set; }
+
+        public IEnumerable<RepairPart> RepairParts { get; set; }
+
+        public IList<SelectListItem> Parts { get; set; }
     }
 }

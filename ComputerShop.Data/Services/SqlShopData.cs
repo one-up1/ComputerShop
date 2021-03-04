@@ -80,12 +80,34 @@ namespace ComputerShop.Data.Services
             db.SaveChanges();
         }
 
-        public IEnumerable<Part> GetRepairParts(int repairId)
+        public IEnumerable<RepairPart> GetRepairParts(int repairId)
         {
-            return from p in db.Parts
-                   join rp in db.RepairParts on p.Id equals rp.Part.Id
-                   where rp.Repair.Id == repairId
-                   select p;
+            return db.RepairParts
+                .Where(rp => rp.Repair.Id == repairId)
+                .Include("Part");
+        }
+
+        public void AddRepairPart(int repairId, int partId)
+        {
+            /*var repairPart = new RepairPart();
+
+            repairPart.Repair = new Repair();
+            repairPart.Repair.Id = repairId;
+
+            repairPart.Part = new Part();
+            repairPart.Part.Id = partId;
+
+            db.RepairParts.Add(repairPart);
+            db.SaveChanges();*/
+            db.Database.ExecuteSqlCommand(
+                "INSERT INTO RepairParts (Repair_Id, Part_Id) VALUES (" + repairId + "," + partId + ")");
+        }
+
+        public void DeleteRepairPart(int id)
+        {
+            var repairPart = db.RepairParts.Find(id);
+            db.RepairParts.Remove(repairPart);
+            db.SaveChanges();
         }
     }
 }

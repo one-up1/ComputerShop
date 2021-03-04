@@ -36,7 +36,6 @@ namespace ComputerShop.Data.Models
         [DataType(DataType.MultilineText)]
         public string Solution { get; set; }
 
-        [Display(Name = "Onderdelen")]
-        public IEnumerable<Part> Parts { get; set; }
+        public IEnumerable<RepairPart> Parts { get; set; }
     }
 }
