@@ -1,6 +1,7 @@
 ﻿using ComputerShop.Data.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace ComputerShop.Data.Services
@@ -99,8 +100,11 @@ namespace ComputerShop.Data.Services
 
             db.RepairParts.Add(repairPart);
             db.SaveChanges();*/
+
             db.Database.ExecuteSqlCommand(
-                "INSERT INTO RepairParts (Repair_Id, Part_Id) VALUES (" + repairId + "," + partId + ")");
+                "INSERT INTO RepairParts (Repair_Id, Part_Id) VALUES (@repairId, @partId)",
+                new SqlParameter("@repairId", repairId),
+                new SqlParameter("@partId", partId));
         }
 
         public void DeleteRepairPart(int id)
