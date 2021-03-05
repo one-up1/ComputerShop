@@ -29,6 +29,6 @@ namespace ComputerShop.Data.Services
 
         void AddRepairPart(int repairId, int partId);
 
-        void DeleteRepairPart(int id);
+        int DeleteRepairPart(int id);
     }
 }

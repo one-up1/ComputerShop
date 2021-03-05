@@ -107,11 +107,17 @@ namespace ComputerShop.Data.Services
                 new SqlParameter("@partId", partId));
         }
 
-        public void DeleteRepairPart(int id)
+        public int DeleteRepairPart(int id)
         {
-            var repairPart = db.RepairParts.Find(id);
+            var repairPart = db.RepairParts
+                .Include(rp => rp.Repair)
+                .SingleOrDefault(rp => rp.Id == id);
+            int repairId = repairPart.Repair.Id;
+
             db.RepairParts.Remove(repairPart);
             db.SaveChanges();
+
+            return repairId;
         }
     }
 }

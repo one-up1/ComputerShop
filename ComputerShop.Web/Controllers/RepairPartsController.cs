@@ -50,9 +50,8 @@ namespace ComputerShop.Web.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            db.DeleteRepairPart(id);
-
-            return RedirectToAction("Index");
+            int repairId = db.DeleteRepairPart(id);
+            return RedirectToAction("Index", new { id = repairId });
         }
     }
 
