@@ -61,7 +61,7 @@ namespace ComputerShop.Web.Controllers
     {
         public int RepairCount { get; set; }
 
-        public double RepairPartsCount { get; set; }
+        public int RepairPartsCount { get; set; }
 
         [DataType(DataType.Currency)]
         public double RepairPartsTotalPrice { get; set; }

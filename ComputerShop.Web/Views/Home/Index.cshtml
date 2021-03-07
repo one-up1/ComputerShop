@@ -9,11 +9,11 @@
 <div class="jumbotron">
     <h1>@ViewBag.Title</h1>
     <div>
-        Er zijn @Model.RepairCount reparaties in de database
+        @Util.GetPluralString(Model.RepairCount, "reparatie", "reparaties")
         @if (Model.RepairPartsCount != 0)
         {
             <text>
-                met in totaal @Model.RepairPartsCount onderdelen (@Html.DisplayFor(model => model.RepairPartsTotalPrice))
+                met in totaal @Util.GetPluralString(Model.RepairPartsCount, "onderdeel", "onderdelen") (@Html.DisplayFor(model => model.RepairPartsTotalPrice))
             </text>
         }
     </div>

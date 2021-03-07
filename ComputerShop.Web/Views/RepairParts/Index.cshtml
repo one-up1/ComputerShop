@@ -1,10 +1,13 @@
-﻿@model ComputerShop.Web.Controllers.RepairPartsViewModel
+﻿@using ComputerShop.Web.Models
+@model ComputerShop.Web.Controllers.RepairPartsViewModel
 
 @{
     ViewBag.Title = "Reparatie onderdelen";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>
+    @(Model.RepairParts.Count() == 0 ? @ViewBag.Title : Util.GetPluralString(@Model.RepairParts.Count(), "onderdeel", "onderdelen"))
+</h2>
 
 @using (Html.BeginForm("Create", "RepairParts"))
 {
