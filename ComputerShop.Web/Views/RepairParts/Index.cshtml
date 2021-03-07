@@ -14,12 +14,8 @@
         @Html.HiddenFor(model => model.RepairId)
 
         @Html.DropDownListFor(model => model.Parts.First().Value, Model.Parts)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Toevoegen" class="btn btn-default" />
-            </div>
-        </div>
+        
+        <input type="submit" value="Toevoegen" class="btn btn-default" />
     </p>
 }
 <table class="table">
@@ -47,9 +43,17 @@
             </td>
         </tr>
     }
-
+    @if (Model.PartsTotalPrice != 0)
+    {
+        <tr>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.PartsTotalPrice)
+            </td>
+            <td></td>
+        </tr>
+    }
 </table>
-
 <div>
     @Html.ActionLink("Terug", "Index", "Repairs")
 </div>

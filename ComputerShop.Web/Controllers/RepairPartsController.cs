@@ -1,7 +1,9 @@
 ﻿using ComputerShop.Data.Models;
 using ComputerShop.Data.Services;
-using System.Web.Mvc;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace ComputerShop.Web.Controllers
 {
@@ -20,6 +22,10 @@ namespace ComputerShop.Web.Controllers
             var model = new RepairPartsViewModel();
             model.RepairId = id;
             model.RepairParts = db.GetRepairParts(id);
+            if (model.RepairParts.Count() > 1)
+            {
+                model.PartsTotalPrice = db.GetRepairPartsPriceSum(id);
+            }
 
             model.Parts = new List<SelectListItem>();
             foreach (var part in db.GetParts())
@@ -42,9 +48,8 @@ namespace ComputerShop.Web.Controllers
             if (ModelState.IsValid)
             {
                 db.AddRepairPart(repairId, value);
-                return RedirectToAction("Index", new { id = repairId });
             }
-            return View();
+            return RedirectToAction("Index", new { id = repairId });
         }
 
         [HttpGet]
@@ -60,6 +65,9 @@ namespace ComputerShop.Web.Controllers
         public int RepairId { get; set; }
 
         public IEnumerable<RepairPart> RepairParts { get; set; }
+
+        [DataType(DataType.Currency)]
+        public double PartsTotalPrice { get; set; }
 
         public IList<SelectListItem> Parts { get; set; }
     }

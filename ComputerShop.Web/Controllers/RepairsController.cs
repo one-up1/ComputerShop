@@ -1,5 +1,8 @@
 ﻿using ComputerShop.Data.Models;
 using ComputerShop.Data.Services;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ComputerShop.Web.Controllers
@@ -22,10 +25,16 @@ namespace ComputerShop.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            var model = db.GetRepair(id);
-            if (model == null)
+            var model = new RepairDetailsViewModel();
+            model.Repair = db.GetRepair(id);
+            if (model.Repair == null)
             {
                 return View("NotFound");
+            }
+            model.RepairParts = db.GetRepairParts(id);
+            if (model.RepairParts.Count() > 1)
+            {
+                model.PartsTotalPrice = db.GetRepairPartsPriceSum(id);
             }
             return View(model);
         }
@@ -90,5 +99,15 @@ namespace ComputerShop.Web.Controllers
             db.DeleteRepair(id);
             return RedirectToAction("Index");
         }
+    }
+
+    public class RepairDetailsViewModel
+    {
+        public Repair Repair { get; set; }
+
+        public IEnumerable<RepairPart> RepairParts { get; set; }
+
+        [DataType(DataType.Currency)]
+        public double PartsTotalPrice { get; set; }
     }
 }

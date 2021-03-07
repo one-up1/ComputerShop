@@ -1,72 +1,72 @@
 ﻿@using ComputerShop.Data.Models
 @using ComputerShop.Web.Models
-@model ComputerShop.Data.Models.Repair
+@model ComputerShop.Web.Controllers.RepairDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details van @Html.DisplayFor(model => model.Name)</h2>
+<h2>Details van @Html.DisplayFor(model => model.Repair.Name)</h2>
 
 <div>
     <h4>Reparatie</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Repair.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Repair.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Repair.Status)
         </dt>
 
         <dd>
-            @(EnumHelper<Status>.GetDisplayValue(Model.Status))
+            @(EnumHelper<Status>.GetDisplayValue(Model.Repair.Status))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Repair.Description)
         </dt>
 
         <dd>
-            <div class="multiline">@Html.DisplayFor(model => model.Description)</div>
+            <div class="multiline">@Html.DisplayFor(model => model.Repair.Description)</div>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.Repair.StartDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.Repair.StartDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.Repair.EndDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+            @Html.DisplayFor(model => model.Repair.EndDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Solution)
+            @Html.DisplayNameFor(model => model.Repair.Solution)
         </dt>
 
         <dd>
-            <div class="multiline">@Html.DisplayFor(model => model.Solution)</div>
+            <div class="multiline">@Html.DisplayFor(model => model.Repair.Solution)</div>
         </dd>
 
         <dt>
-            @Html.ActionLink("Onderdelen", "Index", "RepairParts", new { id = Model.Id }, null)
+            @Html.ActionLink("Onderdelen", "Index", "RepairParts", new { id = Model.Repair.Id }, null)
         </dt>
 
         <dd>
             <table class="table">
-                @foreach (var item in Model.Parts)
+                @foreach (var item in Model.RepairParts)
                 {
                     <tr>
                         <td>
@@ -77,11 +77,21 @@
                         </td>
                     </tr>
                 }
+                @if (Model.PartsTotalPrice != 0)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(model => model.PartsTotalPrice)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
             </table>
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Bewerken", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Bewerken", "Edit", new { id = Model.Repair.Id }) |
     @Html.ActionLink("Terug", "Index")
 </p>

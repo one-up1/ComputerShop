@@ -27,6 +27,12 @@ namespace ComputerShop.Data.Services
 
         IEnumerable<RepairPart> GetRepairParts(int repairId);
 
+        int GetRepairPartsCount();
+
+        double GetRepairPartsPriceSum();
+
+        double GetRepairPartsPriceSum(int repairId);
+
         void AddRepairPart(int repairId, int partId);
 
         int DeleteRepairPart(int id);

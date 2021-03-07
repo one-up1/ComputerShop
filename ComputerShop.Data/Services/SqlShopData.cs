@@ -24,9 +24,7 @@ namespace ComputerShop.Data.Services
 
         public Repair GetRepair(int id)
         {
-            var repair = db.Repairs.FirstOrDefault(r => r.Id == id);
-            repair.Parts = GetRepairParts(id);
-            return repair;
+            return db.Repairs.FirstOrDefault(r => r.Id == id);
         }
 
         public void AddRepair(Repair repair)
@@ -52,7 +50,7 @@ namespace ComputerShop.Data.Services
         public IEnumerable<Part> GetParts()
         {
             return from r in db.Parts
-                   orderby r.Id ascending
+                   orderby r.Name ascending
                    select r;
         }
 
@@ -86,6 +84,23 @@ namespace ComputerShop.Data.Services
             return db.RepairParts
                 .Where(rp => rp.Repair.Id == repairId)
                 .Include("Part");
+        }
+
+        public int GetRepairPartsCount()
+        {
+            return db.RepairParts.Count();
+        }
+
+        public double GetRepairPartsPriceSum()
+        {
+            return db.RepairParts.Sum(rp => rp.Part.Price);
+        }
+
+        public double GetRepairPartsPriceSum(int repairId)
+        {
+            return db.RepairParts
+                .Where(rp => rp.Repair.Id == repairId)
+                .Sum(rp => rp.Part.Price);
         }
 
         public void AddRepairPart(int repairId, int partId)

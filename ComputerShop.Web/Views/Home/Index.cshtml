@@ -1,6 +1,6 @@
 ﻿@using ComputerShop.Data.Models
 @using ComputerShop.Web.Models
-@model IEnumerable<ComputerShop.Data.Models.Repair>
+@model ComputerShop.Web.Controllers.IndexViewModel
 
 @{
     ViewBag.Title = "Computer reparatieshop";
@@ -9,35 +9,32 @@
 <div class="jumbotron">
     <h1>@ViewBag.Title</h1>
     <div>
-        Er zijn @Model.Count() reparaties in de database
+        Er zijn @Model.RepairCount reparaties in de database
+        @if (Model.RepairPartsCount != 0)
+        {
+            <text>
+                met in totaal @Model.RepairPartsCount onderdelen (@Html.DisplayFor(model => model.RepairPartsTotalPrice))
+            </text>
+        }
     </div>
 
-    <div>
-        <br />
-        <table>
-            @{
-                Dictionary<Status, int> statusCounts = new Dictionary<Status, int>();
-                statusCounts.Add(Status.Pending, 0);
-                statusCounts.Add(Status.InProgress, 0);
-                statusCounts.Add(Status.WaitingForParts, 0);
-                statusCounts.Add(Status.Completed, 0);
-
-                foreach (var item in Model)
+    @if (Model.RepairStatusCounts != null)
+    {
+        <div>
+            <br />
+            <table>
+                @foreach (Status status in Model.RepairStatusCounts.Keys)
                 {
-                    statusCounts[item.Status]++;
+                    <tr>
+                        <td>
+                            @(EnumHelper<Status>.GetDisplayValue(status))
+                        </td>
+                        <td style='padding-left: 8px;'>
+                            @Model.RepairStatusCounts[status]
+                        </td>
+                    </tr>
                 }
-            }
-            @foreach (Status status in statusCounts.Keys)
-            {
-                <tr>
-                    <td>
-                        @(EnumHelper<Status>.GetDisplayValue(status))
-                    </td>
-                    <td style='padding-left: 8px;'>
-                        @statusCounts[status]
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+            </table>
+        </div>
+    }
 </div>

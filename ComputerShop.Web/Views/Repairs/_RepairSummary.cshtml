@@ -3,7 +3,7 @@
 @model ComputerShop.Data.Models.Repair
 
 @{
-    var color = Model.EndDate == null || Model.EndDate >= DateTime.Now.Date ? "transparent" : "red";
+    var color = Model.Status == Status.Completed || Model.EndDate == null || Model.EndDate >= DateTime.Now.Date ? "transparent" : "red";
 }
 
 <div class="panel panel-default">
