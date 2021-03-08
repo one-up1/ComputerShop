@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace ComputerShop.Data.Models
 {
@@ -34,5 +36,13 @@ namespace ComputerShop.Data.Models
         [Display(Name = "Oplossing")]
         [DataType(DataType.MultilineText)]
         public string Solution { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string ImageContentType { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Afbeelding")]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

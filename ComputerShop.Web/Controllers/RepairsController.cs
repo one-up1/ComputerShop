@@ -2,6 +2,7 @@
 using ComputerShop.Data.Services;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -39,6 +40,12 @@ namespace ComputerShop.Web.Controllers
             return View(model);
         }
 
+        public FileResult Image(int id)
+        {
+            var repair = db.GetRepair(id);
+            return File(repair.Image, repair.ImageContentType);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -51,6 +58,7 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                ReadRepairImage(repair);
                 db.AddRepair(repair);
                 return RedirectToAction("Details", new { id = repair.Id });
             }
@@ -74,6 +82,7 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                ReadRepairImage(repair);
                 db.UpdateRepair(repair);
                 TempData["Message"] = "Reparatie opgeslagen";
                 return RedirectToAction("Index");
@@ -98,6 +107,18 @@ namespace ComputerShop.Web.Controllers
         {
             db.DeleteRepair(id);
             return RedirectToAction("Index");
+        }
+
+        private static void ReadRepairImage(Repair repair)
+        {
+            if (repair.ImageUpload != null)
+            {
+                using (BinaryReader reader = new BinaryReader(repair.ImageUpload.InputStream))
+                {
+                    repair.Image = reader.ReadBytes(repair.ImageUpload.ContentLength);
+                    repair.ImageContentType = repair.ImageUpload.ContentType;
+                }
+            }
         }
     }
 

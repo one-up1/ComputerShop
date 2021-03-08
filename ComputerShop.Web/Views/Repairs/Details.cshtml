@@ -89,6 +89,19 @@
                 }
             </table>
         </dd>
+
+        @if (Model.Repair.Image != null)
+        {
+            <dd>
+                @{
+                    var base64 = Convert.ToBase64String(Model.Repair.Image);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <a href="@Url.Action("Image", new { id = Model.Repair.Id })">
+                    <img src="@imgSrc" width="250" />
+                </a>
+            </dd>
+        }
     </dl>
 </div>
 <p>
