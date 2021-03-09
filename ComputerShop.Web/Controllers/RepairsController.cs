@@ -34,9 +34,12 @@ namespace ComputerShop.Web.Controllers
                 return View("NotFound");
             }
 
-            WebImage image = new WebImage(model.Repair.Image);
-            image.Resize(250, image.Height, true, true);
-            model.Repair.Image = image.GetBytes();
+            if (model.Repair.Image != null)
+            {
+                WebImage image = new WebImage(model.Repair.Image);
+                image.Resize(250, image.Height, true, true);
+                model.Repair.Image = image.GetBytes();
+            }
             
             model.RepairParts = db.GetRepairParts(id);
             if (model.RepairParts.Count() > 1)
