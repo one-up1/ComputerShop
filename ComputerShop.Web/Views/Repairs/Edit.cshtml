@@ -71,9 +71,10 @@
             <input type="file" name="@Html.NameFor(model => model.ImageUpload)" accept="image/*" />
             @if (Model.Image != null)
             {
-                <br />
-                @Html.EditorFor(model => model.ImageDelete)
-                @Html.LabelFor(model => model.ImageDelete)
+                <p>
+                    @Html.EditorFor(model => model.ImageDelete)
+                    @Html.LabelFor(model => model.ImageDelete)
+                </p>
             }
         </div>
     </div>

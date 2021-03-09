@@ -68,11 +68,8 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (repair.ImageUpload != null)
-                {
-                    ReadRepairImage(repair);
-                    db.AddRepair(repair);
-                }
+                SetRepairImage(repair);
+                db.AddRepair(repair);
                 return RedirectToAction("Details", new { id = repair.Id });
             }
             return View();
@@ -95,14 +92,7 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (repair.ImageUpload != null)
-                {
-                    ReadRepairImage(repair);
-                }
-                else if (repair.ImageDelete)
-                {
-                    repair.Image = null;
-                }
+                SetRepairImage(repair);
                 db.UpdateRepair(repair);
                 TempData["Message"] = "Reparatie opgeslagen";
                 return RedirectToAction("Index");
@@ -129,12 +119,19 @@ namespace ComputerShop.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        private static void ReadRepairImage(Repair repair)
+        private static void SetRepairImage(Repair repair)
         {
-            using (BinaryReader reader = new BinaryReader(repair.ImageUpload.InputStream))
+            if (repair.ImageUpload != null)
             {
-                repair.Image = reader.ReadBytes(repair.ImageUpload.ContentLength);
-                repair.ImageContentType = repair.ImageUpload.ContentType;
+                using (BinaryReader reader = new BinaryReader(repair.ImageUpload.InputStream))
+                {
+                    repair.Image = reader.ReadBytes(repair.ImageUpload.ContentLength);
+                    repair.ImageContentType = repair.ImageUpload.ContentType;
+                }
+            }
+            else if (repair.ImageDelete)
+            {
+                repair.Image = null;
             }
         }
     }
