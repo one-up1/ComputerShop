@@ -68,8 +68,11 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ReadRepairImage(repair);
-                db.AddRepair(repair);
+                if (repair.ImageUpload != null)
+                {
+                    ReadRepairImage(repair);
+                    db.AddRepair(repair);
+                }
                 return RedirectToAction("Details", new { id = repair.Id });
             }
             return View();
@@ -92,7 +95,14 @@ namespace ComputerShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ReadRepairImage(repair);
+                if (repair.ImageUpload != null)
+                {
+                    ReadRepairImage(repair);
+                }
+                else if (repair.ImageDelete)
+                {
+                    repair.Image = null;
+                }
                 db.UpdateRepair(repair);
                 TempData["Message"] = "Reparatie opgeslagen";
                 return RedirectToAction("Index");
@@ -121,13 +131,10 @@ namespace ComputerShop.Web.Controllers
 
         private static void ReadRepairImage(Repair repair)
         {
-            if (repair.ImageUpload != null)
+            using (BinaryReader reader = new BinaryReader(repair.ImageUpload.InputStream))
             {
-                using (BinaryReader reader = new BinaryReader(repair.ImageUpload.InputStream))
-                {
-                    repair.Image = reader.ReadBytes(repair.ImageUpload.ContentLength);
-                    repair.ImageContentType = repair.ImageUpload.ContentType;
-                }
+                repair.Image = reader.ReadBytes(repair.ImageUpload.ContentLength);
+                repair.ImageContentType = repair.ImageUpload.ContentType;
             }
         }
     }

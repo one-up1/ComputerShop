@@ -44,5 +44,9 @@ namespace ComputerShop.Data.Models
         [NotMapped]
         [Display(Name = "Afbeelding")]
         public HttpPostedFileBase ImageUpload { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Verwijder afbeelding")]
+        public bool ImageDelete { get; set; }
     }
 }

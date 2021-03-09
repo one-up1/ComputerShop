@@ -69,6 +69,12 @@
         @Html.LabelFor(model => model.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="file" name="@Html.NameFor(model => model.ImageUpload)" accept="image/*" />
+            @if (Model.Image != null)
+            {
+                <br />
+                @Html.EditorFor(model => model.ImageDelete)
+                @Html.LabelFor(model => model.ImageDelete)
+            }
         </div>
     </div>
 
