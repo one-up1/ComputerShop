@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace ComputerShop.Web.Controllers
@@ -32,11 +33,17 @@ namespace ComputerShop.Web.Controllers
             {
                 return View("NotFound");
             }
+
+            WebImage image = new WebImage(model.Repair.Image);
+            image.Resize(250, image.Height, true, true);
+            model.Repair.Image = image.GetBytes();
+            
             model.RepairParts = db.GetRepairParts(id);
             if (model.RepairParts.Count() > 1)
             {
                 model.PartsTotalPrice = db.GetRepairPartsPriceSum(id);
             }
+
             return View(model);
         }
 
